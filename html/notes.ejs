@@ -1,0 +1,13 @@
+<h1>Your Notes</h1>
+<a href="/notes/new">Create New Note</a>
+<ul>
+  <% notes.forEach(note => { %>
+    <li>
+      <h3><%= note.title %></h3>
+      <p><%= note.content %></p>
+      <small>Created at: <%= note.createdAt.toLocaleString() %></small><br>
+      <a href="/notes/<%= note._id %>">View</a> <!-- ✅ Add this line -->
+    </li>
+  <% }) %>
+</ul>
+
