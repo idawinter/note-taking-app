@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User'); // ✅ make sure this path is correct
+const UserProfile = require('../models/userProfile');
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -22,6 +23,22 @@ async (accessToken, refreshToken, profile, done) => {
         email: profile.emails[0].value
       });
     }
+      // Find or create the UserProfile
+    let userProfile = await UserProfile.findOne({ userId: profile.id });
+
+    if (!userProfile) {
+    // If no profile exists, create it with default preferences
+      userProfile = await UserProfile.create({
+        userId: profile.id,
+        email: profile.emails[0].value,
+        displayName: profile.displayName,
+        avatar: profile.photos[0].value
+      });
+    } else {
+        // Update lastLogin if profile exists
+        userProfile.lastLogin = Date.now();
+        await userProfile.save();
+      }
 
     return done(null, user); // ✅ This is now a MongoDB user, not just the Google profile
   } catch (err) {

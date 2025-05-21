@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/notes-app
 
 app.set('view engine', 'ejs');
 // if you delete this line, it will default to 'views' folder
-app.set('views', path.join(__dirname, 'html')); 
+app.set('views', path.join(__dirname, 'views')); 
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
