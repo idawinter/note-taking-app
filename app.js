@@ -7,6 +7,7 @@ require('dotenv').config();
 require('./config/passport');
 const noteRoutes = require('./routes/notes');
 const apiRoutes = require('./routes/api');
+const dashboardRoutes = require('./routes/dashboard');
 const methodOverride = require('method-override');
 
 const app = express();
@@ -47,15 +48,17 @@ app.get('/', (req, res) => {
   res.render('login', { user: req.user });
 });
 
-app.get('/dashboard', isLoggedIn, (req, res) => {
-  res.render('dashboard', { user: req.user });
-});
+//don't need this code as we have a dedicated dashboard.js route file that loads the full UserProfile
+//app.get('/dashboard', isLoggedIn, (req, res) => {
+//  res.render('dashboard', { user: req.user });
+//});
 
 app.use('/', noteRoutes);
 
 app.use('/', apiRoutes);
 
 
+app.use('/dashboard', dashboardRoutes);
 
 
 // Middleware to check if user is authenticated

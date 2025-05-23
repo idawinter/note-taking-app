@@ -19,6 +19,21 @@
           <p>Email: <%= user.email %></p>
           <p>Google ID: <%= user.id %></p>
         </div>
+
+        <% if (profile) { %>
+          <div class="user-preferences">
+            <h3>Your Preferences</h3>
+            <ul>
+              <li>Font Size: <%= profile.preferences.fontSize %>px</li>
+              <li>Font Color: <%= profile.preferences.fontColor %></li>
+              <li>Font Family: <%= profile.preferences.fontFamily %></li>
+              <li>Note Background: <%= profile.preferences.noteBackground %></li>
+            </ul>
+            <img src="<%= profile.avatar %>" alt="Avatar" class="profile-pic">
+          </div>
+        <% } %>
+        
+
         <div class="auth-info">
           <h3>Authentication Success!</h3>
           <p>You've successfully authenticated with Google OAuth.</p>
