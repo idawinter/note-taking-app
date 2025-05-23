@@ -40,6 +40,11 @@ async (accessToken, refreshToken, profile, done) => {
         await userProfile.save();
       }
 
+    // Log the user and profile information
+    console.log("User logged in:", user);
+    console.log("UserProfile:", userProfile);
+
+
     return done(null, user); // ✅ This is now a MongoDB user, not just the Google profile
   } catch (err) {
     return done(err, null);
