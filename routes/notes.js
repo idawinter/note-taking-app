@@ -37,10 +37,17 @@ router.post('/notes', isLoggedIn, async (req, res) => {
 });
 
 // Show all notes that belong to the logged-in user
+const UserProfile = require('../models/userProfile');
+
 router.get('/notes', isLoggedIn, async (req, res) => {
   try {
     const notes = await Note.find({ owner: req.user._id }).sort({ createdAt: -1 });
-    res.render('notes', { notes });
+    const userProfile = await UserProfile.findOne({ userId: req.user.googleId });
+
+    res.render('notes', { 
+      notes,
+    profile: userProfile 
+    });
   } catch (err) {
     console.error(err);
     res.send('Error fetching notes');
@@ -112,7 +119,12 @@ router.get('/notes/category/:category', isLoggedIn, async (req, res) => {
       category: req.params.category
     }).sort({ createdAt: -1 });
 
-    res.render('notes', { notes });
+    const userProfile = await UserProfile.findOne({ userId: req.user.googleId });
+
+    res.render('notes', { 
+      notes,
+      profile: userProfile
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send('Error filtering notes by category');
