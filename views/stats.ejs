@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Stats</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>User Activity Stats</h1>
+
+    <h2>Total Notes</h2>
+    <p><strong><%= totalNotes %></strong></p>
+
+    <h2>Notes by Category</h2>
+    <ul>
+      <% categoryCounts.forEach(cat => { %>
+        <li><strong><%= cat._id || 'Uncategorized' %></strong>: <%= cat.count %></li>
+      <% }) %>
+    </ul>
+
+    <h2>Recent Notes</h2>
+    <ul>
+      <% recentNotes.forEach(note => { %>
+        <li>
+          <strong><%= note.title %></strong><br>
+          <small>Created at: <%= note.createdAt.toLocaleString() %></small><br>
+          <a href="/notes/<%= note._id %>">View</a>
+        </li>
+      <% }) %>
+    </ul>
+
+    <a href="/dashboard">⬅ Back to Dashboard</a>
+  </div>
+</body>
+</html>
