@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
-// Login
+// Login for Google
 router.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
@@ -14,6 +14,19 @@ router.get('/auth/google/callback',
     successRedirect: '/dashboard'
   })
 );
+
+// Login for Twitter
+//router.get('/auth/twitter',
+//  passport.authenticate('twitter')
+//);
+
+// Callback (what happens when Twitter is done processing)
+//router.get('/auth/twitter/callback', 
+  //passport.authenticate('twitter', { 
+    failureRedirect: '/', 
+  //  successRedirect: '/dashboard'
+  //})
+//);
 
 // Logging out
 router.get('/logout', (req, res) => {

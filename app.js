@@ -74,3 +74,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Visit http://localhost:${PORT} to see the app`);
 });
+
+const listEndpoints = require('express-list-endpoints');
+console.log('\n📋 Registered routes:');
+console.table(listEndpoints(app));

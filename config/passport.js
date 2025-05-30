@@ -2,6 +2,22 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User'); // ✅ make sure this path is correct
 const UserProfile = require('../models/userProfile');
+const TwitterStrategy = require('passport-twitter').Strategy;
+
+//passport.use(new TwitterStrategy({
+  //TWITTER_CONSUMER_KEY,
+  //consumerSecret: process.env.//TWITTER_CONSUMER_SECRET,
+  //callbackURL: "/auth/twitter///callback",
+  //includeEmail: true
+//},
+  //function(token, tokenSecret, //profile, done) { 
+  //  if (profile.emails[0]) {
+  //    profile.email = profile.emails[0].value // Extract email from profile
+  //  }
+    // Mongo stuff
+  //  return done(null,profile); // ✅ This is the Twitter profile, not a MongoDB user
+  //}
+//))
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
