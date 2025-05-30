@@ -69,12 +69,23 @@ function isLoggedIn(req, res, next) {
   res.redirect('/');
 }
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Visit http://localhost:${PORT} to see the app`);
-});
+//const PORT = process.env.PORT || 3000;
+//app.listen(PORT, () => {
+//  console.log(`Server running on port ${PORT}`);
+//  console.log(`Visit http://localhost:${PORT} to see the app`);
+//});
 
 const listEndpoints = require('express-list-endpoints');
 console.log('\n📋 Registered routes:');
 console.table(listEndpoints(app));
+
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Visit http://localhost:${PORT} to see the app`);
+  });
+}
+
+module.exports = app;
+

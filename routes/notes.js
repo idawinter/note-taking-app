@@ -32,7 +32,7 @@ router.post('/notes', isLoggedIn, async (req, res) => {
     res.redirect('/notes');
   } catch (err) {
     console.error(err);
-    res.send('Error creating note');
+    res.status(400).send('Bad Request: ' + err.message);
   }
 });
 
