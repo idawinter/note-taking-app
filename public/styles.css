@@ -22,6 +22,21 @@
     margin-bottom: 30px;
     color: #2c3e50;
   }
+
+  .title-banner {
+    background-image: url('/images/flowers.jpeg');
+    background-size: cover;
+    background-position: center;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .title-banner h1 {
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  }  
   
   .auth-box {
     background-color: #fff;
@@ -40,20 +55,24 @@
     margin: 30px 0;
   }
   
-  .google-btn {
+  .auth-buttons a {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #757575;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    gap: 10px;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: 500;
+    border-radius: 6px;
     text-decoration: none;
-    transition: background-color 0.3s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Google button */
+  .google-btn {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ddd;
   }
   
   .google-btn:hover {
@@ -63,8 +82,24 @@
   .google-btn img {
     width: 20px;
     height: 20px;
-    margin-right: 10px;
   }
+  
+  /* Facebook button */
+  .facebook-btn {
+    background-color: #3b5998;
+    color: #fff;
+    border: none;
+  }
+  
+  .facebook-btn:hover {
+    background-color: #324b81;
+  }
+  
+  .facebook-btn img {
+    width: 20px;
+    height: 20px;
+  }
+  
   
   .user-info {
     margin-top: 20px;

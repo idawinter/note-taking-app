@@ -28,6 +28,19 @@ router.get('/auth/google/callback',
   //})
 //);
 
+// Login for Facebook
+router.get('/auth/facebook',
+  passport.authenticate('facebook')
+);
+
+// Callback (what happens when Facebook is done processing)
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: '/',
+    successRedirect: '/dashboard'
+  })
+);
+
 // Logging out
 router.get('/logout', (req, res) => {
   req.logout(function(err) {

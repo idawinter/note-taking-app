@@ -12,12 +12,19 @@
     <div class="dashboard-content">
       <% if (user) { %>
         <div class="user-profile">
-          <% if (user.photo) { %>
-            <img src="<%= user.photo %>" alt="Profile Picture" class="profile-pic">
+          <% if (user.photo || profile?.avatar) { %>
+            <img src="<%= user.photo || profile.avatar %>" alt="Profile Picture" class="profile-pic">
           <% } %>
           <h2>Welcome, <%= user.displayName %>!</h2>
-          <p>Email: <%= user.email %></p>
-          <p>Google ID: <%= user.id %></p>
+          <% if (user.email) { %>
+            <p>Email: <%= user.email %></p>
+          <% } %>
+          
+          <% if (user.googleId) { %>
+            <p>Google ID: <%= user.googleId %></p>
+          <% } else if (user.facebookId) { %>
+            <p>Facebook ID: <%= user.facebookId %></p>
+          <% } %>
         </div>
 
         <% if (profile) { %>
@@ -29,16 +36,24 @@
               <li>Font Family: <%= profile.preferences.fontFamily %></li>
               <li>Note Background: <%= profile.preferences.noteBackground %></li>
             </ul>
-            <img src="<%= profile.avatar %>" alt="Avatar" class="profile-pic">
+            <% if (profile.avatar) { %>
+              <img src="<%= profile.avatar %>" alt="Avatar" class="profile-pic">
+            <% } %>
           </div>
         <% } %>
-        
 
         <div class="auth-info">
           <h3>Authentication Success!</h3>
-          <p>You've successfully authenticated with Google OAuth.</p>
+          <% if (user.googleId) { %>
+            <p>You’ve successfully authenticated with <strong>Google</strong> OAuth.</p>
+          <% } else if (user.facebookId) { %>
+            <p>You’ve successfully authenticated with <strong>Facebook</strong> OAuth.</p>
+          <% } else { %>
+            <p>You are logged in via an unknown provider.</p>
+          <% } %>
           <p>In a real application, you would now have access to protected resources.</p>
         </div>
+        
         <a href="/logout" class="logout-btn">Logout</a>
       <% } else { %>
         <p>You need to login to view this page.</p>

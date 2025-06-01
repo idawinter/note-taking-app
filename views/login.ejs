@@ -3,28 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Express Auth Demo</title>
+  <title>Note-Taking App</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="container">
-    <h1>Express Authentication Demo</h1>
+    <div class="title-banner">
+      <h1>Ida's Note-Taking App</h1>
+    </div>    
     <div class="auth-box">
-      <h2>Login with OAuth</h2>
-      <p>This demo shows how to implement Google OAuth authentication with PassportJS.</p>
+      <h2>Login</h2>
+      <p>Log in to start taking and organizing your personal notes!</p>
       
       <div class="auth-buttons">
         <a href="/auth/google" class="google-btn">
-          <img src="/google-logo.png" alt="Google Logo">
+          <img src="/images/google-logo.png" alt="Google Logo">
           Login with Google
         </a>
-   <!--     <a href="/auth/twitter" class="twitter-btn">
+      
+        <a href="/auth/facebook" class="facebook-btn">
+          <img src="/images/facebook-logo.png" alt="Facebook Logo">
+          Login with Facebook
+        </a>
+      </div>
+      
+        <!-- Twitter button (optional / commented out)
+        <a href="/auth/twitter" class="twitter-btn">
           <img src="/images/twitter-logo.png" alt="Twitter Logo">
           Login with Twitter
-        </a> -->
-
-      </div>
-
+        </a>
+        -->
       
       <% if (user) { %>
         <div class="user-info">

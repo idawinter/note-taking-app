@@ -3,6 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User'); // ✅ make sure this path is correct
 const UserProfile = require('../models/userProfile');
 const TwitterStrategy = require('passport-twitter').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 //passport.use(new TwitterStrategy({
   //TWITTER_CONSUMER_KEY,
@@ -66,6 +67,31 @@ async (accessToken, refreshToken, profile, done) => {
     return done(err, null);
   }
 }));
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: "/auth/facebook/callback",
+  profileFields: ['id', 'displayName', 'emails'] // Request user's email and name
+},
+async function(accessToken, refreshToken, profile, done) {
+  try {
+    let user = await User.findOne({ facebookId: profile.id });
+
+    if (!user) {
+      user = await User.create({
+        facebookId: profile.id,
+        displayName: profile.displayName,
+        email: profile.emails?.[0]?.value || ''
+      });
+    }
+
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+}
+));
 
 // Serialize the MongoDB user ID into the session
 passport.serializeUser((user, done) => {
