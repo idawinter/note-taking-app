@@ -4,6 +4,8 @@ const User = require('../models/User'); // ✅ make sure this path is correct
 const UserProfile = require('../models/userProfile');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 
 //passport.use(new TwitterStrategy({
   //TWITTER_CONSUMER_KEY,
@@ -92,6 +94,32 @@ async function(accessToken, refreshToken, profile, done) {
   }
 }
 ));
+
+passport.use(new LocalStrategy({
+  usernameField: 'email', // We're using email instead of username
+  passwordField: 'password'
+}, async (email, password, done) => {
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return done(null, false, { message: 'No user found with that email.' });
+    }
+
+    if (!user.password) {
+      return done(null, false, { message: 'Looks like you signed up using Google or Facebook. Try logging in with one of those instead.' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+}));
 
 // Serialize the MongoDB user ID into the session
 passport.serializeUser((user, done) => {

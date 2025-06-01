@@ -5,12 +5,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-  facebookId: {type: String, required: false},
+  facebookId: {
+    type: String,
+    required: false
+  },
   displayName: {
     type: String,
     required: true
   },
   email: {
+    type: String,
+    required: false
+  },
+  password: {
     type: String,
     required: false
   }

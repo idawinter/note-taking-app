@@ -1,6 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+const User = require('../models/User');
 
 // Login for Google
 router.get('/auth/google',
@@ -40,6 +42,79 @@ router.get('/auth/facebook/callback',
     successRedirect: '/dashboard'
   })
 );
+
+// Login for Local Strategy
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+// Signup route for email/password
+router.post('/signup', async (req, res) => {
+  const { displayName, email, password } = req.body;
+
+  try {
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      if (!existingUser.password) {
+        return res.send('This email is already linked to a Google or Facebook login. Please use that method to sign in.');
+      } else {
+      return res.send('An account with this email already exists. Please log in.');
+     }
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create new user
+    const newUser = new User({
+      displayName,
+      email,
+      password: hashedPassword
+    });
+
+    await newUser.save();
+    res.redirect('/');
+  } catch (err) {
+    console.error('Signup error:', err);
+    res.status(500).send('Something went wrong. Please try again.');
+  }
+});
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.send('No account found with that email. Please sign up.');
+    }
+
+    if (!user.password) {
+      return res.send('This account was created with Google or Facebook. Please use that login method.');
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.send('Incorrect password. Please try again.');
+    }
+
+    // Log the user in manually
+    req.login(user, (err) => {
+      if (err) {
+        console.error('Login error:', err);
+        return res.status(500).send('Login failed.');
+      }
+      return res.redirect('/dashboard');
+    });
+
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).send('Something went wrong. Please try again.');
+  }
+});
 
 // Logging out
 router.get('/logout', (req, res) => {

@@ -33,7 +33,17 @@
           Login with Twitter
         </a>
         -->
-      
+
+        <hr>
+      <h3>Or log in with email</h3>
+        <form action="/login" method="POST" class="local-login-form">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Log In</button>
+        </form>
+
+        <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+        
       <% if (user) { %>
         <div class="user-info">
           <p>You're already logged in as: <%= user.displayName %></p>
