@@ -14,11 +14,21 @@ function isLoggedIn(req, res, next) {
 // GET /dashboard
 router.get('/', isLoggedIn, async (req, res) => {
   try {
-    const userProfile = await UserProfile.findOne({ userId: req.user.googleId });
+    const userId = req.user._id;
+
+    const userProfile = await UserProfile.findOne({ userId: req.user._id });
+
+    const recentNotes = await Note.find({ owner: userId })
+      .sort({ createdAt: -1 })
+      .limit(3);
+
+    const categories = await Note.distinct('category', { owner: userId });
 
     res.render('dashboard', {
       user: req.user,
-      profile: userProfile
+      profile: userProfile,
+      recentNotes,
+      categories
     });
   } catch (err) {
     console.error('Error loading dashboard:', err);
@@ -29,7 +39,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 // GET /dashboard/preferences – show preference form
 router.get('/preferences', isLoggedIn, async (req, res) => {
   try {
-    const userProfile = await UserProfile.findOne({ userId: req.user.googleId });
+    const userProfile = await UserProfile.findOne({ userId: req.user._id });
 
     res.render('preferences', {
       profile: userProfile
@@ -44,7 +54,7 @@ router.get('/preferences', isLoggedIn, async (req, res) => {
 router.post('/preferences', isLoggedIn, async (req, res) => {
   try {
     await UserProfile.findOneAndUpdate(
-      { userId: req.user.googleId },
+      { userId: req.user._id },
       {
         preferences: {
           fontSize: req.body.fontSize,

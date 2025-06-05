@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const userProfileSchema = new mongoose.Schema({
-  userId: String, // Google ID from Passport
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   email: String,
   displayName: String,
   avatar: String,

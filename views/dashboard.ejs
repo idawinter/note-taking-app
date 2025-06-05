@@ -3,63 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Express Auth Demo</title>
+  <title>Dashboard - Ida's Notes</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="container">
     <h1>Dashboard</h1>
-    <div class="dashboard-content">
-      <% if (user) { %>
+
+    <% if (user) { %>
+      <div class="dashboard-content">
+
+        <!-- Profile Picture and Welcome -->
         <div class="user-profile">
           <% if (user.photo || profile?.avatar) { %>
             <img src="<%= user.photo || profile.avatar %>" alt="Profile Picture" class="profile-pic">
           <% } %>
           <h2>Welcome, <%= user.displayName %>!</h2>
-          <% if (user.email) { %>
-            <p>Email: <%= user.email %></p>
-          <% } %>
-          
-          <% if (user.googleId) { %>
-            <p>Google ID: <%= user.googleId %></p>
-          <% } else if (user.facebookId) { %>
-            <p>Facebook ID: <%= user.facebookId %></p>
-          <% } %>
         </div>
 
-        <% if (profile) { %>
-          <div class="user-preferences">
-            <h3>Your Preferences</h3>
-            <ul>
-              <li>Font Size (live): <%= profile.preferences.fontSize %>px</li>
-              <li>Font Color: <%= profile.preferences.fontColor %></li>
-              <li>Font Family: <%= profile.preferences.fontFamily %></li>
-              <li>Note Background: <%= profile.preferences.noteBackground %></li>
-            </ul>
-            <% if (profile.avatar) { %>
-              <img src="<%= profile.avatar %>" alt="Avatar" class="profile-pic">
-            <% } %>
-          </div>
-        <% } %>
-
-        <div class="auth-info">
-          <h3>Authentication Success!</h3>
-          <% if (user.googleId) { %>
-            <p>You’ve successfully authenticated with <strong>Google</strong> OAuth.</p>
-          <% } else if (user.facebookId) { %>
-            <p>You’ve successfully authenticated with <strong>Facebook</strong> OAuth.</p>
-          <% } else { %>
-            <p>You are logged in via an unknown provider.</p>
-          <% } %>
-          <p>In a real application, you would now have access to protected resources.</p>
+        <!-- Action Buttons -->
+        <div class="dashboard-buttons">
+          <a href="/notes/new" class="primary-btn">Create a New Note</a>
+          <a href="/notes" class="primary-btn">View All Notes</a>
         </div>
-        
-        <a href="/logout" class="logout-btn">Logout</a>
-      <% } else { %>
-        <p>You need to login to view this page.</p>
-        <a href="/" class="login-link">Go to Login</a>
-      <% } %>
-    </div>
+
+        <!-- Last 3 Notes -->
+        <div class="recent-notes">
+          <h3>Recent Notes</h3>
+          <% recentNotes.forEach(note => { %>
+            <div class="note-card">
+              <h4><a href="/notes/<%= note._id %>"><%= note.title %></a></h4>
+              <p><%= note.content.slice(0, 100) %>...</p>
+              <small><%= note.category %></small>
+            </div>
+          <% }) %>
+        </div>
+
+        <!-- Note Categories -->
+        <div class="note-categories">
+          <h3>Note Categories</h3>
+          <% categories.forEach(cat => { %>
+            <a href="/notes/category/<%= cat %>" class="folder-link"><%= cat %></a>
+          <% }) %>
+        </div>
+
+        <!-- Preferences and Logout -->
+        <div class="bottom-buttons">
+          <a href="/dashboard/preferences" class="secondary-btn">Preferences</a>
+          <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+
+      </div>
+    <% } else { %>
+      <p>You need to login to view this page.</p>
+      <a href="/" class="login-link">Go to Login</a>
+    <% } %>
+
   </div>
 </body>
 </html>

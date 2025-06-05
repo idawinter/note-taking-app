@@ -48,7 +48,11 @@
   
   h2 {
     margin-bottom: 20px;
-    color: #3498db;
+    color: #5DB3D0;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
   }
   
   .auth-buttons {
@@ -98,6 +102,40 @@
   .facebook-btn img {
     width: 20px;
     height: 20px;
+  }
+  
+  .local-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .local-login-form input {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .local-login-form button {
+    background-color: #F3F6C7;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  .local-login-form button:hover {
+    background-color: #DFD6A4; /* slightly darker on hover */
   }
   
   
@@ -156,3 +194,13 @@
   .logout-btn:hover {
     background-color: #c0392b;
   }
+
+  .auth-box h3 {
+    margin-top: 20px;
+    color: #5DB3D0;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
