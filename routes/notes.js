@@ -42,7 +42,7 @@ const UserProfile = require('../models/userProfile');
 router.get('/notes', isLoggedIn, async (req, res) => {
   try {
     const notes = await Note.find({ owner: req.user._id }).sort({ createdAt: -1 });
-    const userProfile = await UserProfile.findOne({ userId: req.user.googleId });
+    const userProfile = await UserProfile.findOne({ userId: req.user._id });
 
     res.render('notes', { 
       notes,
@@ -119,7 +119,7 @@ router.get('/notes/category/:category', isLoggedIn, async (req, res) => {
       category: req.params.category
     }).sort({ createdAt: -1 });
 
-    const userProfile = await UserProfile.findOne({ userId: req.user.googleId });
+    const userProfile = await UserProfile.findOne({ userId: req.user._id });
 
     res.render('notes', { 
       notes,

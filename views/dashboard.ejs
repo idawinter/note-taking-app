@@ -21,40 +21,57 @@
             <%= user.displayName ? user.displayName.split(' ')[0] + "'s Notes" : "Your Notes" %>
           </h1>          
                    
-        </div>
-              
+        </div> 
 
         <!-- Action Buttons -->
-        <div class="dashboard-buttons">
-          <a href="/notes/new" class="primary-btn">Create a New Note</a>
-          <a href="/notes" class="primary-btn">View All Notes</a>
+        <div class="post-it-wrapper">
+          <a href="/notes/new" class="post-it">Create a New Note</a>
+          <div class="tape tape-top"></div>
         </div>
+        <div class="post-it-wrapper">
+          <a href="/notes" class="post-it">View All Notes</a>
+          <div class="tape tape-top"></div>
+        </div>              
 
         <!-- Last 3 Notes -->
         <div class="recent-notes">
           <h3>Recent Notes</h3>
-          <% recentNotes.forEach(note => { %>
-            <div class="note-card">
-              <h4><a href="/notes/<%= note._id %>"><%= note.title %></a></h4>
-              <p><%= note.content.slice(0, 100) %>...</p>
-              <small><%= note.category %></small>
-            </div>
-          <% }) %>
-        </div>
+          <div class="note-grid">
+            <% recentNotes.forEach(note => { %>
+              <div class="note-card">
+                <div class="hole top-hole"></div>
+                <div class="hole middle-hole"></div>
+                <div class="hole bottom-hole"></div>
+                <div class="note-content">
+                  <h4><a href="/notes/<%= note._id %>"><%= note.title %></a></h4>
+                  <p><%= note.content.slice(0, 100) %>...</p>
+                  <small><%= note.category %></small>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>        
 
         <!-- Note Categories -->
-        <div class="note-categories">
-          <h3>Note Categories</h3>
-          <% categories.forEach(cat => { %>
-            <a href="/notes/category/<%= cat %>" class="folder-link"><%= cat %></a>
-          <% }) %>
-        </div>
+        <div class="category-section">
+          <h3>Categories</h3>
+          <div class="folder-grid">
+            <% categories.forEach(category => { %>
+              <div class="folder">
+                <a href="/notes/category/<%= category %>">
+                  <div class="folder-tab"><%= category %></div>
+                  <div class="folder-body"></div>
+                </a>
+              </div>
+            <% }) %>
+          </div>
+        </div>        
 
         <!-- Preferences and Logout -->
         <div class="bottom-buttons">
-          <a href="/dashboard/preferences" class="secondary-btn">Preferences</a>
-          <a href="/logout" class="logout-btn">Logout</a>
-        </div>
+          <a href="/dashboard/preferences" class="preference-btn">🎨 Preferences</a>
+          <a href="/logout" class="logout-btn">👋 Logout</a>
+        </div>        
 
       </div>
     <% } else { %>

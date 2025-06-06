@@ -9,12 +9,21 @@
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
-  }
+  
+    /* ✅ Add background image */
+    background-image: url('/images/cork-board.jpeg'); /* ✅ Make sure the image is in public/images/ */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }  
   
   .container {
     max-width: 800px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 2rem; /* this combines both paddings */
+    background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white for "paper on desk" look */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
   }
   
   h1 {
@@ -217,4 +226,241 @@
     font-weight: 600;
     color: #2c3e50;
   }
-  
+
+  .post-it-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 1rem;
+  }
+
+  .post-it {
+    display: block;
+    width: 180px;
+    height: 180px;
+    background: #fff799;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 1.1rem;
+    padding: 1rem;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #e6de8d;
+    transform: rotate(-2deg);
+  }
+
+  .post-it:hover {
+    transform: rotate(0deg) scale(1.05);
+    transition: 0.2s ease-in-out;
+  }
+
+/* Washi tape look */
+  .tape {
+    content: '';
+    width: 60px;
+    height: 20px;
+    background: repeating-linear-gradient(
+      45deg,
+     #f6b8b8,
+     #f6b8b8 5px,
+      #fff 5px,
+      #fff 10px
+  );
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+
+/* Styling for Recent Notes */
+.recent-notes {
+  margin: 2rem 0;
+}
+
+.note-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.note-card {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  height: 200px;
+  padding: 1.5rem 1rem 1rem 3.5rem; /* leave space for pink line and holes */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 25px; /* moved further left */
+  height: 100%;
+  width: 2px;
+  background-color: pink;
+  z-index: 0;
+}
+
+.note-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: repeating-linear-gradient(to bottom, transparent, transparent 20px, #add8e6 21px);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.note-content {
+  position: relative;
+  z-index: 1;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 1rem;
+}
+
+.hole {
+  position: absolute;
+  left: 8px;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.top-hole {
+  top: 20px;
+}
+.middle-hole {
+  top: 90px;
+}
+.bottom-hole {
+  top: 160px;
+}
+
+/* Category Folder Styling */
+.folder-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.folder {
+  width: 160px;
+  height: 120px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.folder a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.folder-tab {
+  width: 90px;
+  height: 30px;
+  background-color: #f2c779; /* manila tab */
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.folder-body {
+  width: 100%;
+  height: 100%;
+  background-color: #f6d89c; /* manila folder body */
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  position: absolute;
+  top: 10px;
+  left: 0;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.folder:hover .folder-tab {
+  transform: translateY(-4px) rotateX(10deg);
+}
+
+.folder:hover .folder-body {
+  transform: scaleY(1.03);
+}
+
+/* Preferences and Logout Buttons */
+.bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px dashed #ccc;
+}
+
+/* 🎨 Preferences Button */
+.preference-btn {
+  background: linear-gradient(135deg, #ffe6cc, #ffcc99);
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 1rem;
+  color: #5a381e;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Hover effect */
+.preference-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #ffd699, #ffb366);
+}
+
+/* 👋 Logout Button */
+.logout-btn {
+  background-color: #ffcccc;
+  color: #8b0000;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #ff9999;
+  transform: translateY(-3px);
+}
