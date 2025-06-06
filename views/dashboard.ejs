@@ -8,18 +8,21 @@
 </head>
 <body>
   <div class="container">
-    <h1>Dashboard</h1>
 
     <% if (user) { %>
+
       <div class="dashboard-content">
 
         <!-- Profile Picture and Welcome -->
-        <div class="user-profile">
-          <% if (user.photo || profile?.avatar) { %>
-            <img src="<%= user.photo || profile.avatar %>" alt="Profile Picture" class="profile-pic">
-          <% } %>
-          <h2>Welcome, <%= user.displayName %>!</h2>
+        <div class="dashboard-header">
+          <img class="profile-pic" src="<%= user.avatar %>" alt="Profile Picture">
+          <% const firstName = user.displayName ? user.displayName.split(' ')[0] : null; %>
+          <h1 class="dashboard-title">
+            <%= user.displayName ? user.displayName.split(' ')[0] + "'s Notes" : "Your Notes" %>
+          </h1>          
+                   
         </div>
+              
 
         <!-- Action Buttons -->
         <div class="dashboard-buttons">

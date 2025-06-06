@@ -24,8 +24,18 @@ router.get('/', isLoggedIn, async (req, res) => {
 
     const categories = await Note.distinct('category', { owner: userId });
 
+    // Clone req.user and add avatar if it exists in profile
+
+    console.log('REQ.USER:', req.user);
+
+    const user = {
+      ...req.user,
+      displayName: userProfile?.displayName || req.user.displayName || req.user.email || 'User',
+      avatar: userProfile?.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(userProfile?.displayName || req.user.displayName || req.user.email || 'User')
+    };
+
     res.render('dashboard', {
-      user: req.user,
+      user,
       profile: userProfile,
       recentNotes,
       categories

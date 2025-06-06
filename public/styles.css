@@ -138,7 +138,6 @@
     background-color: #DFD6A4; /* slightly darker on hover */
   }
   
-  
   .user-info {
     margin-top: 20px;
     padding-top: 20px;
@@ -202,5 +201,20 @@
     font-size: 24px;
     margin-bottom: 15px;
     text-align: center;
+  }
+  
+  /*dashboard styling*/
+
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .dashboard-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
   }
   
