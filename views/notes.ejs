@@ -1,29 +1,48 @@
-<!-- Optional: remove this debug line when ready -->
-<!-- <pre><%= JSON.stringify(profile.preferences, null, 2) %></pre> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Notes</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
 
-<div style="
-  font-size: <%= profile.preferences.fontSize %>px;
-  color: <%= profile.preferences.fontColor %>;
-  font-family: <%= profile.preferences.fontFamily %>;
-  background-color: <%= profile.preferences.noteBackground %>;
-  padding: 20px;
-  border-radius: 10px;
-">
+<a href="/dashboard" class="back-to-dashboard">← Back to Dashboard</a>
 
-  <h1>Your Notes</h1>
-  <a href="/notes/new">Create New Note</a>
+  <div class="container" style="
+    font-size: <%= profile.preferences.fontSize %>px;
+    color: <%= profile.preferences.fontColor %>;
+    font-family: <%= profile.preferences.fontFamily %>;
+    background-color: <%= profile.preferences.noteBackground %>;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  ">
 
-  <ul>
-    <% notes.forEach(note => { %>
-      <li style="margin-bottom: 20px;">
-        <h3><%= note.title %></h3>
-        <p><%= note.content %></p>
-        <small>Created at: <%= note.createdAt.toLocaleString() %></small><br>
-        <a href="/notes/<%= note._id %>">View</a>
-      </li>
-    <% }) %>
-  </ul>
+    <% const firstName = profile?.displayName?.split(' ')[0] || "Your"; %>
 
-</div>
+    <% const titleColor = (profile.preferences.fontColor === '#000000' || !profile.preferences.fontColor) ? '#5DB3D0' : profile.preferences.fontColor; %>
 
+    <h1 style="color: <%= titleColor %>;">All of <%= firstName %>'s Notes</h1>
 
+    <a href="/notes/new" class="post-it">+ Create New Note</a>
+
+    <ul class="note-list">
+      <% notes.forEach(note => { %>
+        <li class="note-card">
+          <div class="hole top-hole"></div>
+          <div class="hole middle-hole"></div>
+          <div class="hole bottom-hole"></div>
+          <div class="note-content">
+            <h3><a href="/notes/<%= note._id %>" class="note-title"><%= note.title %></a></h3>
+            <p><%= note.content.slice(0, 100) %>...</p>
+            <small>Category: <%= note.category %></small><br>
+            <small>Created at: <%= note.createdAt.toLocaleString() %></small><br>
+            <a href="/notes/<%= note._id %>">View</a>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>

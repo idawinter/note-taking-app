@@ -43,7 +43,7 @@
                 <div class="hole middle-hole"></div>
                 <div class="hole bottom-hole"></div>
                 <div class="note-content">
-                  <h4><a href="/notes/<%= note._id %>"><%= note.title %></a></h4>
+                  <h4><a href="/notes/<%= note._id %>" class="note-title"><%= note.title %></a></h4>
                   <p><%= note.content.slice(0, 100) %>...</p>
                   <small><%= note.category %></small>
                 </div>

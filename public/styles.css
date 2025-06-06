@@ -224,7 +224,7 @@
   .dashboard-title {
     font-size: 2rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: #5DB3D0;
   }
 
   .post-it-wrapper {
@@ -274,8 +274,27 @@
   }
 
 /* Styling for Recent Notes */
+.note-title {
+  color: #5DB3D0; /* same soft blue as your login page */
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.note-title:hover {
+  text-decoration: underline;
+  color: #429bb8; /* slightly darker blue on hover */
+}
+
 .recent-notes {
   margin: 2rem 0;
+}
+
+.recent-notes h3 {
+  color: #5DB3D0;
 }
 
 .note-grid {
@@ -357,6 +376,10 @@
 }
 
 /* Category Folder Styling */
+.category-section h3 {
+  color: #5DB3D0;
+}
+
 .folder-grid {
   display: flex;
   flex-wrap: wrap;
@@ -463,4 +486,202 @@
 .logout-btn:hover {
   background-color: #ff9999;
   transform: translateY(-3px);
+}
+
+/* New Note Design */
+.back-to-dashboard,
+.back-to-notes {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.back-to-dashboard:hover,
+.back-to-notes:hover {
+  font-size: 1.2rem;
+}
+
+.page-title {
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin-bottom: 1rem;
+  color: #5DB3D0
+}
+
+/* Big Note Card Styling */
+.big-note-card {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem 2rem 2rem 4.5rem;
+  overflow: hidden;
+}
+
+.big-note-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 40px;
+  height: 100%;
+  width: 2px;
+  background-color: pink;
+  z-index: 0;
+}
+
+.big-note-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: repeating-linear-gradient(to bottom, transparent, transparent 28px, #add8e6 29px);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.big-note-card form {
+  position: relative;
+  z-index: 1;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.big-note-card input[type="text"],
+.big-note-card textarea {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.big-note-card button {
+  background-color: #fff799;
+  color: #333;
+  border: 1px solid #e6de8d;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.big-note-card button:hover {
+  transform: scale(1.05);
+}
+
+.big-note-card .hole {
+  position: absolute;
+  left: 12px;
+  width: 14px;
+  height: 14px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.big-note-card .top-hole {
+  top: 30px;
+}
+
+.big-note-card .middle-hole {
+  top: 160px;
+}
+
+.big-note-card .bottom-hole {
+  top: 290px;
+}
+
+/* All Notes Page Styling */
+.note-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.note-list li.note-card {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  height: 200px;
+  padding: 1.5rem 1rem 1rem 3.5rem; /* space for holes and line */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.note-list li.note-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 25px;
+  height: 100%;
+  width: 2px;
+  background-color: pink;
+  z-index: 0;
+}
+
+.note-list li.note-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: repeating-linear-gradient(to bottom, transparent, transparent 20px, #add8e6 21px);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.note-list li.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.note-card .note-content {
+  position: relative;
+  z-index: 1;
+  font-size: 1rem;
+}
+
+.hole {
+  position: absolute;
+  left: 8px;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.top-hole {
+  top: 20px;
+}
+.middle-hole {
+  top: 90px;
+}
+.bottom-hole {
+  top: 160px;
 }

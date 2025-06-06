@@ -22,12 +22,19 @@ router.post('/notes', isLoggedIn, async (req, res) => {
     console.log("Logged-in user:", req.user);
 
     const { title, content, category } = req.body;
+
+    const formatCategory = (str) => {
+      if (!str) return '';
+      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    };    
+
     const note = new Note({
       title,
       content,
-      category,
+      category: formatCategory(category),
       owner: req.user._id
     });
+    
     await note.save();
     res.redirect('/notes');
   } catch (err) {

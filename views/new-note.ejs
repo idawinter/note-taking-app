@@ -1,14 +1,35 @@
-<h1>Create a New Note</h1>
-<form action="/notes" method="POST">
-  <label>Title:</label>
-  <input type="text" name="title" required><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create a New Note</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
 
-  <label>Content:</label><br>
-  <textarea name="content" rows="6" cols="40" required></textarea><br>
+  <!-- These links will sit directly on the corkboard background -->
+  <a href="/dashboard" class="back-to-dashboard">← Back to Dashboard</a>
 
-  <label>Category:</label>
-  <input type="text" name="category" placeholder="e.g. work, personal"><br>
+  <div class="container">
+    <h1 class="page-title">Create a New Note</h1>
 
-  <button type="submit">Save Note</button>
-</form>
-<a href="/notes">Back to Notes</a>
+    <div class="big-note-card">
+      <form action="/notes" method="POST">
+        <label>Title:</label>
+        <input type="text" name="title" required>
+
+        <label>Content:</label>
+        <textarea name="content" rows="6" required></textarea>
+
+        <label>Category:</label>
+        <input type="text" name="category" placeholder="e.g. work, personal">
+
+        <button type="submit">Save Note</button>
+      </form>
+    </div>
+  </div>
+
+  <a href="/notes" class="back-to-notes">← Back to Notes</a>
+
+</body>
+</html>
