@@ -5,7 +5,12 @@
   <title>User Stats</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body class="stats-page">
+
+  <button id="toggle-dark" aria-label="Toggle dark mode">🌙</button>
+
+  <div class="stats-clipboard">
+
   <div class="container">
     <h1>User Activity Stats</h1>
 
@@ -29,8 +34,28 @@
         </li>
       <% }) %>
     </ul>
-
+<br>
     <a href="/dashboard">⬅ Back to Dashboard</a>
   </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('toggle-dark');
+  
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      toggle.textContent = '☀️';
+    } else {
+      toggle.textContent = '🌙';
+    }
+  
+    toggle.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark-mode');
+      toggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+  
 </body>
 </html>
