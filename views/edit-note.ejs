@@ -1,20 +1,46 @@
-<h1>Edit Note</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Note</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
 
-<form action="/notes/<%= note._id %>?_method=PUT" method="POST">
-  <label>Title:</label>
-  <input type="text" name="title" value="<%= note.title %>" required><br>
+  <!-- Links on the corkboard -->
+  <a href="/notes" class="back-to-notes">← Cancel</a><br>
+  <a href="/dashboard" class="back-to-dashboard">← Back to Dashboard</a>
 
-  <label>Content:</label><br>
-  <textarea name="content" rows="6" cols="40" required><%= note.content %></textarea><br>
+  <!-- White paper container -->
+  <div class="container">
+    <!-- Full view for single note editing -->
+    <div class="full-note-view">
+      <div class="big-note-card">
+        <div class="hole top-hole"></div>
+        <div class="hole middle-hole"></div>
+        <div class="hole bottom-hole"></div>
 
-  <label>Category:</label><br>
-  <input type="text" name="category" value="<%= note.category || '' %>"><br>
+        <form action="/notes/<%= note._id %>?_method=PUT" method="POST">
+          <h1 class="page-title">Edit Note</h1>
 
-  <button type="submit">Update Note</button>
-</form>
+          <label>Title:</label>
+          <input type="text" name="title" value="<%= note.title %>" required>
 
-<form action="/notes/<%= note._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this note?');">
-  <button type="submit" style="margin-top: 10px;">Delete Note</button>
-</form>
+          <label>Content:</label>
+          <textarea name="content" rows="10" required><%= note.content %></textarea>
 
-<a href="/notes">Cancel</a>
+          <label>Category:</label>
+          <input type="text" name="category" value="<%= note.category || '' %>">
+
+          <button type="submit">Update Note</button>
+        </form>
+
+        <form action="/notes/<%= note._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this note?');">
+          <button type="submit" style="margin-top: 10px;">Delete Note</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

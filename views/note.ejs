@@ -1,8 +1,32 @@
-<h1><%= note.title %></h1>
-<p><%= note.content %></p>
-<small>Created: <%= note.createdAt.toLocaleString() %></small><br>
-<small>Category: <%= note.category || 'Uncategorized' %></small><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= note.title %> - Note</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
 
-<a href="/notes/<%= note._id %>/edit">Edit</a>
+  <a href="/notes" class="back-to-notes">← Back to All Notes</a><br>
 
-<a href="/notes">Back to All Notes</a>
+  <a href="/dashboard" class="back-to-dashboard">← Back to Dashboard</a>
+
+  <div class="container full-note-view">
+    <div class="note-card">
+      <div class="hole top-hole"></div>
+      <div class="hole middle-hole"></div>
+      <div class="hole bottom-hole"></div>
+
+      <div class="note-content">
+        <h1 class="note-title"><%= note.title %></h1>
+        <p><%= note.content %></p>
+        <small>Created: <%= note.createdAt.toLocaleString() %></small><br>
+        <small>Category: <%= note.category || 'Uncategorized' %></small><br><br>
+
+        <a href="/notes/<%= note._id %>/edit" class="edit-link">✏️ Edit Note</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

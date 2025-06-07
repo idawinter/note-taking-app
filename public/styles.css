@@ -354,6 +354,18 @@
   font-size: 1rem;
 }
 
+/* styling for full note */
+.full-note-view {
+  max-height: none;
+  overflow: visible;
+}
+
+.full-note-view .note-card {
+  max-height: none;
+  overflow: visible;
+  height: auto;
+}
+
 .hole {
   position: absolute;
   left: 8px;

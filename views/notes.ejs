@@ -9,7 +9,10 @@
 
 <a href="/dashboard" class="back-to-dashboard">← Back to Dashboard</a>
 
-  <div class="container" style="
+<!-- Outer white container -->
+<div class="container">
+  <!-- User preferences applied here -->
+  <div style="
     font-size: <%= profile.preferences.fontSize %>px;
     color: <%= profile.preferences.fontColor %>;
     font-family: <%= profile.preferences.fontFamily %>;
@@ -19,9 +22,8 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   ">
 
-    <% const firstName = profile?.displayName?.split(' ')[0] || "Your"; %>
-
-    <% const titleColor = (profile.preferences.fontColor === '#000000' || !profile.preferences.fontColor) ? '#5DB3D0' : profile.preferences.fontColor; %>
+    <% const firstName = (profile && profile.displayName) ? profile.displayName.split(' ')[0] : "Your"; %>
+    <% const titleColor = (!profile.preferences.fontColor || profile.preferences.fontColor === '#000000') ? '#5DB3D0' : profile.preferences.fontColor; %>
 
     <h1 style="color: <%= titleColor %>;">All of <%= firstName %>'s Notes</h1>
 
@@ -43,6 +45,9 @@
         </li>
       <% }) %>
     </ul>
+
   </div>
+</div>
+
 </body>
 </html>
