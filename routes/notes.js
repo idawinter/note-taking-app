@@ -130,8 +130,10 @@ router.get('/notes/category/:category', isLoggedIn, async (req, res) => {
 
     res.render('notes', { 
       notes,
-      profile: userProfile
+      profile: userProfile,
+      category: req.params.category  // ✅ add this line
     });
+    
   } catch (err) {
     console.error(err);
     res.status(500).send('Error filtering notes by category');

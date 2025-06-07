@@ -25,7 +25,11 @@
     <% const firstName = (profile && profile.displayName) ? profile.displayName.split(' ')[0] : "Your"; %>
     <% const titleColor = (!profile.preferences.fontColor || profile.preferences.fontColor === '#000000') ? '#5DB3D0' : profile.preferences.fontColor; %>
 
+    <% if (typeof category !== 'undefined') { %>
+    <h1 style="color: <%= titleColor %>;"><%= category.charAt(0).toUpperCase() + category.slice(1) %></h1>
+    <% } else { %>
     <h1 style="color: <%= titleColor %>;">All of <%= firstName %>'s Notes</h1>
+    <% } %>
 
     <a href="/notes/new" class="post-it">+ Create New Note</a>
 
