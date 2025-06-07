@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
+  <button id="toggle-dark" aria-label="Toggle dark mode">🌙</button>
+
   <div class="container">
     <h1>Log In with Email</h1>
     <div class="auth-box">
@@ -24,5 +27,24 @@
       <p>Don't have an account? <a href="/signup">Sign up</a></p>
     </div>
   </div>
+
+  <script>
+    const toggle = document.getElementById('toggle-dark');
+  
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      toggle.textContent = '☀️';
+    } else {
+      toggle.textContent = '🌙';
+    }
+  
+    toggle.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark-mode');
+      toggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>  
+
 </body>
 </html>
