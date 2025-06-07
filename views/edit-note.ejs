@@ -11,6 +11,8 @@
   <a href="/notes" class="back-to-notes">← Cancel</a><br>
   <a href="/dashboard" class="back-to-dashboard">← Back to Dashboard</a>
 
+    <button id="toggle-dark">🌙</button>
+
   <!-- White paper container -->
   <div class="container">
     <!-- Full view for single note editing -->
@@ -41,6 +43,29 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const toggle = document.getElementById('toggle-dark');
+  
+    function updateIcon() {
+      const isDark = document.body.classList.contains('dark-mode');
+      toggle.textContent = isDark ? '☀️' : '🌙';
+    }
+  
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateIcon();
+    });
+  
+    window.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+      }
+      updateIcon();
+    });
+  </script>  
 
 </body>
 </html>

@@ -697,3 +697,136 @@
 .bottom-hole {
   top: 160px;
 }
+
+/* Dark Mode Styles */
+
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark-mode .container {
+  background-color: rgba(43, 43, 43, 0.9); /* darker but visible */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* more realistic shadow */
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+body.dark-mode .note-card {
+  background-color: #2c2c2c;
+  border-color: #444;
+}
+
+body.dark-mode .note-title,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #5db3d0;
+}
+
+body.dark-mode a {
+  color: #f1f1f1;
+}
+
+body.dark-mode .post-it {
+  background: #ffe066;
+  color: #333;
+}
+
+body.dark-mode .dark-toggle {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+#toggle-dark {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#toggle-dark:hover {
+  transform: scale(1.2);
+}
+/* Inner content container (the one with user preference background) 
+body.dark-mode .container > div {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}*/
+
+body.dark-mode .note-content {
+  color: #f1f1f1; /* light gray/white for readability */
+}
+body.dark-mode small {
+  color: #f1f1f1;
+}
+/* Labels, inputs, and textarea in dark mode */
+body.dark-mode input[type="text"],
+body.dark-mode textarea {
+  background-color: #444;
+  color: #f1f1f1;
+  border: 1px solid #666;
+}
+
+/* Labels */
+body.dark-mode label {
+  color: #f1f1f1;
+}
+
+body.dark-mode .big-note-card {
+  background-color: #2b2b2b;
+  color: #f1f1f1;
+  border: 1px solid #555;
+  padding: 2rem 2rem 2rem 4.5rem; /* ← fix the padding here */
+  border-radius: 12px;
+}
+
+body.dark-mode .note-card {
+  background-color: #2c2c2c;
+  border: 1px solid #999; /* <-- Add this line */
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.05); /* optional soft glow */
+}
+
+/* Ensure form fields look consistent in dark mode */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #ccc;
+}
+
+/* Fix bright white boxes in dark mode */
+body.dark-mode .dashboard-content,
+body.dark-mode .auth-box,
+body.dark-mode .user-profile {
+  background-color: #2b2b2b;
+  color: #f1f1f1;
+}
+
+/* More precise: only style the container in notes.ejs where profile preferences apply */
+body.dark-mode .notes-content-container {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+body.dark-mode .notes-page > div {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+}

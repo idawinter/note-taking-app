@@ -8,6 +8,8 @@
 </head>
 <body>
   <div class="container">
+    
+    <button id="toggle-dark" aria-label="Toggle dark mode">🌙</button>
 
     <% if (user) { %>
 
@@ -31,8 +33,9 @@
         <div class="post-it-wrapper">
           <a href="/notes" class="post-it">View All Notes</a>
           <div class="tape tape-top"></div>
-        </div>              
-
+        </div>   
+        <a href="/dashboard/stats" class="dashboard-button">📊 View My Stats</a>
+          
         <!-- Last 3 Notes -->
         <div class="recent-notes">
           <h3>Recent Notes</h3>
@@ -80,5 +83,25 @@
     <% } %>
 
   </div>
+
+  <script>
+    const toggle = document.getElementById('toggle-dark');
+  
+    // Set initial icon based on localStorage
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      toggle.textContent = '☀️';
+    } else {
+      toggle.textContent = '🌙';
+    }
+  
+    toggle.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark-mode');
+      toggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>  
+
 </body>
 </html>
