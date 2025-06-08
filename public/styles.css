@@ -883,3 +883,31 @@ body.dark-mode .stats-clipboard {
 body.dark-mode .stats-clipboard::before {
   background-color: #666;
 }
+
+/* Responsive adjustments */
+
+@media (max-width: 600px) {
+  .note-grid {
+    flex-direction: column;
+    flex-wrap: wrap; /* override the nowrap */
+    align-items: center;
+  }
+
+  .note-card {
+    width: 90% !important;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .bottom-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .bottom-buttons a {
+    width: 100%;
+    text-align: center;
+  }
+}
